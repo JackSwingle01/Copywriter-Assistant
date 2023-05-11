@@ -1,9 +1,8 @@
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 from langchain.docstore.document import Document
-import wikipedia as wiki
 from docs import make_doc_with_source
-
+from wiki import get_wiki_page
 
 def gather_links_from_url(url: str) -> dict[str, str]:
     """ 
@@ -78,23 +77,3 @@ def get_doc_from_webpage(url: str, page_name=None) -> Document:
 
     return doc
 
-
-def get_wiki_page(title: str, search: bool = False) -> wiki.WikipediaPage:
-
-    try:
-        return wiki.page(title, auto_suggest=False)
-    except:
-        print("Wiki page not found, trying auto-suggest")
-
-    try:
-        return wiki.page(title, auto_suggest=True)
-    except:
-        print("Wiki page not found, trying search")
-
-    if search:
-        try:
-            return wiki.page(wiki.search(title)[0])
-        except:
-            print("Wiki page not found")
-
-    return None
