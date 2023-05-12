@@ -34,12 +34,12 @@ if outline and institution_name and submit:
         st.write(f"Getting relevant info from docs about {title} at {institution_name}...")
         docs_info = db.ask_db(f"{title} at {institution_name}")
         st.write(f"Here's the info we got:")
-        st.code(docs_info)
+        st.write(docs_info)
         st.write("Now we'll get relevant info from the web.")
         # get relevant info from web:
         web_info = web_search(f"What is {title} at {institution_name}")
         st.write(f"Here's the info we got:")
-        st.code(web_info)
+        st.write(web_info)
         # combine info
         info = docs_info + web_info
         # pass info to content chain:
@@ -47,7 +47,7 @@ if outline and institution_name and submit:
         content = generate_content.run(
             {"page_title": title, "relevant_info": info, "institution_name": institution_name})
         st.write(f"Here's the content we got:")
-        st.code(content)
+        st.write(content)
         # store page content
         pages[title] = content
 

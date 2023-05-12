@@ -48,7 +48,7 @@ def gather_info(subject: str, dir: str = './data/to_process/') -> None:
             break
 
     print("Chunking documents...")
-    docs = chunk_docs(docs, 1200, 200)
+    docs = chunk_docs(docs)
     print(f"Found {len(docs)} documents.")
     print(
         f"Larges document is {max([len(doc.page_content) for doc in docs])} characters long.")

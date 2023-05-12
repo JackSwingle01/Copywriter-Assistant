@@ -105,7 +105,10 @@ class VectorDB:
 
     def ask_db(self, question: str) -> str:
         qa = RetrievalQA.from_chain_type(
-            llm=CHAT_MODEL, chain_type="stuff", retriever=self.langchain_wrapper.as_retriever(), verbose=True)
+            llm=CHAT_MODEL,
+            chain_type="stuff",
+            retriever=self.langchain_wrapper.as_retriever(),
+            verbose=True,)
         return qa.run(question)
 
     def find_similar_docs(self, query: str, num_results: int = 4) -> list[Document]:
